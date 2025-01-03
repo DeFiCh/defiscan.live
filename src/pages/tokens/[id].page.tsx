@@ -272,7 +272,7 @@ function ListLeft({
 }
 
 function BackingAddress({ tokenSymbol }: { tokenSymbol: string }): JSX.Element {
-  if (!TOKEN_BACKED.map((token) => token.symbol).includes(tokenSymbol)) {
+  if (!TOKEN_BACKED.map((token) => token.symbol).includes("___INVALID___")) {
     return <></>;
   }
 
