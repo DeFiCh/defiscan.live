@@ -37,6 +37,7 @@
     "no-underscore-dangle": "off",
     "global-require": "off",
     "curly": ["error", "all"],
+    "react/jsx-curly-brace-presence": "off",
     "brace-style": ["error", "1tbs"],
     "func-style": [2, "declaration"],
     "no-void": "off",
