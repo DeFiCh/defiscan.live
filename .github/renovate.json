@@ -1,3 +1,0 @@
-{
-  "extends": ["github>waveshq/standard//renovate-config/web"]
-}
