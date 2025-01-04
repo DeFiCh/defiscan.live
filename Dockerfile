@@ -1,27 +1,26 @@
 FROM node:18-alpine AS base
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the package files to the working directory
-COPY package.json pnpm-lock.yaml /app/
+COPY package.json .
+COPY package-lock.json .
+RUN npm install --include=dev
 
-# Install PNPM globally
-RUN npm install -g pnpm
-
-# Install project dependencies using PNPM
-RUN pnpm install --ignore-scripts puppeteer
-# To check why lossless-json is not installed by jellyfishsdk
-RUN pnpm install lossless-json@1.0.5
-
-# Copy the rest of the application code
 COPY . .
 
-# Build the Next.js application
-RUN pnpm run build
+ENV NODE_ENV=production
+# Note: Make sure to set these in the next-config.js file for the client as well
+# or will have CSP errors
+ENV NEXT_PUBLIC_RPC_CLIENT_ENDPOINT=https://ocean.defichain.com/v0/mainnet/rpc
+ENV NEXT_PUBLIC_API_CLIENT_ENDPOINT=https//ocean.defichain.com
 
-# Expose the port on which the application will run
+# For HTTP testing only
+# ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
+# export NEXT_PUBLIC_RPC_CLIENT_ENDPOINT=https://ocean.defichain.com/v0/mainnet/rpc
+# export NEXT_PUBLIC_API_CLIENT_ENDPOINT=https://ocean.defichain.com
+
+RUN npm run build
+
 EXPOSE 3000
-
-# Start the Next.js application
-CMD ["pnpm", "start"]
+CMD ["npm", "run", "start"]
