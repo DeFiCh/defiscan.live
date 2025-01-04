@@ -16,7 +16,7 @@ concurrency:
 jobs:
   main:
     name: Cypress
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     strategy:
       fail-fast: false # https://github.com/cypress-io/github-action/issues/48
@@ -25,7 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
-      - run: corepack enable pnpm
+
+      - name: Setup cypress deps
+        run: |
+          sudo apt update && sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # v4.0.0
         with:
@@ -44,7 +47,7 @@ jobs:
           build: npm run cypress:build
           start: npm run start
           wait-on: "http://localhost:3000"
-          browser: chrome
+          browser: electron
           spec: cypress/e2e/**
           tag: ${{ github.event_name }}
         env:

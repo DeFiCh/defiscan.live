@@ -1,10 +1,11 @@
-FROM node:18-alpine AS base
+FROM node:18 AS base
 
 WORKDIR /app
 
 COPY package.json .
 COPY package-lock.json .
-RUN npm install --include=dev
+# Install both dependencies and devDependencies
+RUN npm ci
 
 COPY . .
 
