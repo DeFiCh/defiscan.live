@@ -22,11 +22,12 @@ jobs:
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # v4.0.0
         with:
           node-version-file: ".nvmrc"
-          cache: "pnpm"
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-      - run: pnpm install --frozen-lockfile
+      - run: npm ci
       - run: tsc
-      - run: pnpm run lint
+      - run: npm run lint
 
   lint_prettier:
     name: Lint - Prettier
@@ -39,9 +40,10 @@ jobs:
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # v4.0.0
         with:
           node-version-file: ".nvmrc"
-          cache: "pnpm"
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-      - run: pnpm install --frozen-lockfile
+      - run: npm ci
       - run: npx pretty-quick --staged --check --pattern "**/*.{js,jsx,ts,tsx}"
 
   jest:
@@ -55,7 +57,8 @@ jobs:
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # v4.0.0
         with:
           node-version-file: ".nvmrc"
-          cache: "pnpm"
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
+      - run: npm ci
+      - run: npm test

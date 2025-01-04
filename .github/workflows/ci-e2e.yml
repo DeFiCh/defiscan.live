@@ -30,8 +30,10 @@ jobs:
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # v4.0.0
         with:
           node-version-file: ".nvmrc"
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-      - run: pnpm install --frozen-lockfile
+      - run: npm ci
 
       - uses: cypress-io/github-action@ebe8b24c4428922d0f793a5c4c96853a633180e3 # v6.6.0
         with:
@@ -39,8 +41,8 @@ jobs:
           install: false
           record: true
           parallel: true
-          build: pnpm run cypress:build
-          start: pnpm run start
+          build: npm run cypress:build
+          start: npm run start
           wait-on: "http://localhost:3000"
           browser: chrome
           spec: cypress/e2e/**
