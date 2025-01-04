@@ -13,6 +13,7 @@ ENV NODE_ENV=production
 # or will have CSP errors
 ENV NEXT_PUBLIC_RPC_CLIENT_ENDPOINT=https://ocean.defichain.com/v0/mainnet/rpc
 ENV NEXT_PUBLIC_API_CLIENT_ENDPOINT=https://ocean.defichain.com
+ENV PORT=3000
 
 # For HTTP testing only
 # ENV NODE_TLS_REJECT_UNAUTHORIZED=0
@@ -22,5 +23,5 @@ ENV NEXT_PUBLIC_API_CLIENT_ENDPOINT=https://ocean.defichain.com
 
 RUN npm run build
 
-EXPOSE 3000
+EXPOSE ${PORT}
 CMD ["npm", "run", "start"]
