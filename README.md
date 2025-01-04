@@ -1,4 +1,4 @@
-[![CI](https://github.com/BirthdayResearch/defiscan.live/actions/workflows/ci.yml/badge.svg)](https://github.com/BirthdayResearch/defiscan.live/actions/workflows/ci.yml)
+[![CI](https://github.com/DeFiCh/defiscan.live/actions/workflows/ci.yml/badge.svg)](https://github.com/DeFiCh/defiscan.live/actions/workflows/ci.yml)
 [![scan](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/count/oa9mrn/main&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/oa9mrn/runs)
 [![codecov](https://codecov.io/gh/DeFiCh/scan/branch/main/graph/badge.svg?token=GZe1B7l9ra)](https://codecov.io/gh/DeFiCh/scan)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9e2e89a0c9cfa93478eb/maintainability)](https://codeclimate.com/github/DeFiCh/scan/maintainability)
@@ -6,8 +6,6 @@
 # [DeFi Scan](https://defiscan.live)
 
 > https://defiscan.live
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7c8f536f-028f-493f-953f-293dcde36f89/deploy-status)](https://app.netlify.com/sites/defi-scan/deploys)
 
 DeFi Scan, everything one-stop location for DeFi Blockchain. Powered
 by [DeFi Jellyfish](https://github.com/BirthdayResearch/jellyfishsdk) & ocean network.
@@ -73,10 +71,6 @@ those directories.
 | `/src/store`      | global state that is used in at least more than once         |
 | `/app/styles`     | tailwind css style configuration                             |
 
-### IntelliJ IDEA
-
-IntelliJ IDEA is the IDE of choice for writing and maintaining this library. IntelliJ's files are included for
-convenience with basic toolchain setup but use of IntelliJ is totally optional.
 
 ### Security issues
 
