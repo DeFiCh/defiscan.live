@@ -7,7 +7,7 @@ class Environment {
   constructor(
     public readonly name: "Production" | "Development",
     public readonly debug: boolean,
-    public readonly networks: EnvironmentNetwork[]
+    public readonly networks: EnvironmentNetwork[],
   ) {}
 
   /**
@@ -39,10 +39,11 @@ export function getEnvironment(): Environment {
     case "production":
       return new Environment("Production", false, [
         EnvironmentNetwork.MainNet,
-        EnvironmentNetwork.TestNet,
-        EnvironmentNetwork.DevNet,
-        EnvironmentNetwork.RemotePlayground,
-        EnvironmentNetwork.Changi,
+        // Temporarily disabled until switched to community based network
+        // EnvironmentNetwork.TestNet,
+        // EnvironmentNetwork.DevNet,
+        // EnvironmentNetwork.RemotePlayground,
+        // EnvironmentNetwork.Changi,
       ]);
     case "development":
     default:
