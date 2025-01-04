@@ -8,7 +8,6 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import { PoolPairsProvider } from "@store/poolpairs";
 import { SupplyProvider } from "@store/supply";
 import { getInitialTheme, ThemeProvider } from "@contexts/ThemeContext";
-import { WarningBanner } from "@components/commons/banner/WarningBanner";
 import { DexPricesProvider } from "@store/dexPrices";
 import { ReusableSVGElements } from "@components/icons/assets/tokens/ReusableSVGElements";
 import { Header } from "./components/Header";
@@ -27,7 +26,7 @@ const description =
  * Finally with <WhaleProvider> to provide WhaleContext for accessing of WhaleAPI and WhaleRPC.
  */
 export function Default(
-  props: PropsWithChildren<ScanAppProps>
+  props: PropsWithChildren<ScanAppProps>,
 ): JSX.Element | null {
   const initialTheme = getInitialTheme();
   const [mounted, setMounted] = useState(false);
@@ -76,7 +75,6 @@ export function Default(
                   <PoolPairsProvider>
                     <DexPricesProvider>
                       <ThemeProvider theme={initialTheme}>
-                        <WarningBanner />
                         <Header />
                         <ReusableSVGElements />
                         <main className="flex-grow">{props.children}</main>

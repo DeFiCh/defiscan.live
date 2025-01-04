@@ -24,7 +24,10 @@ export const dexPrices = createSlice({
   reducers: {
     update: (
       state,
-      action: PayloadAction<{ dexPrices: DexPricesProps; denomination: string }>
+      action: PayloadAction<{
+        dexPrices: DexPricesProps;
+        denomination: string;
+      }>,
     ) => {
       state.dexPrices = {
         ...state.dexPrices,
@@ -44,7 +47,7 @@ export const dexPricesSelectorByDenomination = createSelector(
   ],
   (dexPrices, denomination) => {
     return dexPrices[denomination] ?? {};
-  }
+  },
 );
 
 export function DexPricesProvider(props: PropsWithChildren<{}>): JSX.Element {
@@ -55,16 +58,16 @@ export function DexPricesProvider(props: PropsWithChildren<{}>): JSX.Element {
   const denomination = "USDT";
 
   useEffect(() => {
-    function fetch(): void {
+    function fetchData(): void {
       void api.poolpairs.listDexPrices(denomination).then((data) => {
         dispatch(
-          dexPrices.actions.update({ dexPrices: data.dexPrices, denomination })
+          dexPrices.actions.update({ dexPrices: data.dexPrices, denomination }),
         );
       });
     }
 
-    fetch();
-    const intervalId = setInterval(fetch, interval);
+    fetchData();
+    const intervalId = setInterval(fetchData, interval);
     return () => clearInterval(intervalId);
   }, []);
 

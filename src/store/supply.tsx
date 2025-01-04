@@ -40,14 +40,14 @@ export function SupplyProvider(props: PropsWithChildren<{}>): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    function fetch(): void {
+    function fetchData(): void {
       void api.stats.getSupply().then((data) => {
         dispatch(supply.actions.update(data));
       });
     }
 
-    fetch();
-    const intervalId = setInterval(fetch, interval);
+    fetchData();
+    const intervalId = setInterval(fetchData, interval);
     return () => clearInterval(intervalId);
   }, []);
 

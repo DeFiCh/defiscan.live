@@ -95,7 +95,7 @@ export const stats = createSlice({
       state,
       action: PayloadAction<
         StatsData & { lastSuccessfulSync?: string; lastSync?: string }
-      >
+      >,
     ) => {
       state.count = action.payload.count;
       state.tvl = action.payload.tvl;
@@ -128,7 +128,7 @@ export function StatsProvider(props: PropsWithChildren<{}>): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    function fetch(): void {
+    function fetchData(): void {
       // if blockchain is connected successfully, update both lastSync & lastSuccessfulSync to current date
       void api.stats
         .get()
@@ -138,7 +138,7 @@ export function StatsProvider(props: PropsWithChildren<{}>): JSX.Element {
               ...data,
               lastSync: new Date().toString(),
               lastSuccessfulSync: new Date().toString(),
-            })
+            }),
           );
           dispatch(stats.actions.setConnected(true));
         })
@@ -148,14 +148,14 @@ export function StatsProvider(props: PropsWithChildren<{}>): JSX.Element {
               // if blockchain is not connected successfully, only update value of lastSync to current date
               ...err,
               lastSync: new Date().toString(),
-            })
+            }),
           );
           dispatch(stats.actions.setConnected(false));
         });
     }
 
-    fetch();
-    const intervalId = setInterval(fetch, interval);
+    fetchData();
+    const intervalId = setInterval(fetchData, interval);
     return () => clearInterval(intervalId);
   }, [api, dispatch]);
 

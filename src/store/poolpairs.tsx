@@ -31,14 +31,14 @@ export function PoolPairsProvider(props: PropsWithChildren<{}>): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    function fetch(): void {
+    function fetchData(): void {
       void api.poolpairs.list(200).then((data) => {
         dispatch(poolpairs.actions.update(data));
       });
     }
 
-    fetch();
-    const intervalId = setInterval(fetch, interval);
+    fetchData();
+    const intervalId = setInterval(fetchData, interval);
     return () => clearInterval(intervalId);
   }, []);
 
