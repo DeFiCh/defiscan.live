@@ -1,22 +1,26 @@
+const url = require("node:url");
+
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
       `default-src 'none';` +
       `base-uri 'none';` +
-      `child-src 'self' app.netlify.com;` +
+      `child-src 'self';` +
       `form-action 'none';` +
       `frame-ancestors 'none';` +
       `img-src 'self' data:;` +
       `media-src 'self';` +
       `object-src 'none';` +
-      `script-src 'self' app.netlify.com netlify-cdp-loader.netlify.app ${
+      `script-src 'self' ${
         process.env.NODE_ENV === "development" ? `'unsafe-eval'` : ""
       };` +
       `style-src 'self' fonts.googleapis.com 'unsafe-inline';` +
       `font-src fonts.gstatic.com data:;` +
-      `connect-src 'self' ocean.defichain.com 35.241.191.23:3000 *.jellyfishsdk.com playground.jellyfishsdk.com wallet.defichain.com ${
-        process.env.NODE_ENV === "development"
+      `connect-src 'self' ocean.defichain.com *.jellyfishsdk.com ${
+        url.parse(process.env.NEXT_PUBLIC_API_CLIENT_ENDPOINT || "")?.host } ${
+          url.parse(process.env.NEXT_PUBLIC_RPC_CLIENT_ENDPOINT || "")?.host } ${ 
+            process.env.NODE_ENV === "development"
           ? `ws://localhost:3000/_next/webpack-hmr`
           : ""
       };`,
