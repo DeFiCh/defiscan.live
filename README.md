@@ -21,7 +21,7 @@ We use `npm 7` for this project, it's required to set
 up [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces).
 
 ```shell
-npm install
+npm install --include=dev
 ```
 
 ### Getting started
@@ -29,7 +29,7 @@ npm install
 First, run the development server:
 
 ```bash
-pnpm run dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -57,7 +57,6 @@ scan/
 │  │  └─ index.tsx
 │  ├─ store/
 │  └─ styles/
-└─ cypress/
 ```
 
 DeFi Scan project is structured with 2 core directories. Each pull request will likely carry significant changes into
@@ -73,25 +72,6 @@ those directories.
 | `/src/pages`      | each page is associated with a route based on its file name  |
 | `/src/store`      | global state that is used in at least more than once         |
 | `/app/styles`     | tailwind css style configuration                             |
-| `/cypress`        | E2E testing                                                  |
-
-### End-to-end Testing
-
-End-to-end testing; tests the entire lifecycle of DeFi Scan. All components and screen are integrated together as
-expected for real use cases. As such test are written for real usage narrative as a normal consumer would. They are
-placed in the `/cypress` directory, and we use [Cypress](https://github.com/cypress-io/cypress) to facilitate the
-testing.
-
-Cypress is a modern end-to-end testing framework for web. It uses a sequential jest like approach for testing with
-automatic wait and retrofitted with many utilities for great testing quality of life. Utilities are further customized
-for DeFi Scan with our own construct. We set up a web environment to run end-to-end testing together with a
-local [playground](https://github.com/DeFiCh/playground).
-
-To facilitate fast and ephemeral testing culture, we use [DeFi Playground](https://github.com/DeFiCh/playground). DeFi
-Playground is a specialized testing blockchain isolated from MainNet for testing DeFi applications. It uses `regtest`
-under the hood, you can `npm run playground` for the local playground environment or let it default to remote. Assets
-are not real, it can be minted by anyone. Blocks are generated every 3 seconds, the chain resets daily on remote
-playground.
 
 ### IntelliJ IDEA
 
